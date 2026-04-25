@@ -1,4 +1,4 @@
-import { StatusLevel, ThresholdConfig } from "@/types/sesnsor";
+import { StatusLevel, ThresholdConfig } from "@/types/sensor";
 
 export const THRESHOLD: Record<string, ThresholdConfig> = {
   "WL-001": { siaga: 200, waspada: 250, awas: 300 },
