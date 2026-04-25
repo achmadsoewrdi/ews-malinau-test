@@ -1,0 +1,52 @@
+services:
+  # 1. Service Database (Postgres)
+  db:
+    image: postgres:15-alpine
+    container_name: ews_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-ews_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-ews_db}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 2. Service Ingest (Worker untuk memasukkan data awal)
+  ingest:
+    build:
+      context: ./ingest
+    container_name: ews_ingest
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # 3. Service Web (Next.js Dashboard)
+  web:
+    build:
+      context: ./web
+    container_name: ews_web
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      ingest:
+        condition: service_completed_successfully
+
+# Mendefinisikan volume untuk persistensi data database
+volumes:
+  postgres_data:
