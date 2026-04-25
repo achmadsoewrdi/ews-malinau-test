@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { query } from "@/lib/db";
 import { classifyStatus, SENSOR_META } from "@/lib/thresholds";
-import { SensorStatus } from "@/types/sesnsor";
+import { SensorStatus } from "@/types/sensor";
 
 // dont cache result API
-export const dynamic = "force-dynaamic";
+export const dynamic = "force-dynamic";
 
 // ======================
 //  GET SENSOR STATUS
