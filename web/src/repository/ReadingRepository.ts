@@ -44,7 +44,9 @@ export async function getLast24Hours(
     .getRepository(Reading)
     .createQueryBuilder("r")
     .where("r.sensorId = :sensorId", { sensorId })
-    .andWhere("r.timestamp >= NOW() - INTERVAL '24 hours'")
+    .andWhere(
+      "r.timestamp >= (SELECT MAX(timestamp) FROM readings WHERE sensor_id = :sensorId) - INTERVAL '24 hours'",
+    )
     .orderBy("r.timestamp", "ASC")
     .getMany();
 
