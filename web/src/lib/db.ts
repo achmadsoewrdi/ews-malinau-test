@@ -1,6 +1,17 @@
 import { DataSource } from "typeorm";
-import { getInitializedDataSource } from "../data-source";
+import { Reading } from "../entity/Reading"; // Ditambah "../" karena pindah folder ke lib
 
-export async function getDataSource(): Promise<DataSource> {
-  return getInitializedDataSource();
+export const AppDataSource = new DataSource({
+  type: "postgres",
+  url: process.env.DATABASE_URL,
+  entities: [Reading],
+  synchronize: false,
+  logging: false,
+});
+
+export async function getInitializedDataSource(): Promise<DataSource> {
+  if (!AppDataSource.isInitialized) {
+    await AppDataSource.initialize();
+  }
+  return AppDataSource;
 }
