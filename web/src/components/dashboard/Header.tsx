@@ -1,6 +1,5 @@
 import React from "react";
 import { formatDateWIB } from "@/utils/formatter";
-import { Waves } from "lucide-react"; // Import icon Waves
 
 interface HeaderProps {
   lastUpdated?: string;
@@ -10,10 +9,6 @@ export default function Header({ lastUpdated }: HeaderProps) {
   return (
     <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 py-6">
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center shadow-xl shadow-blue-200">
-          <Waves className="h-7 w-7 text-white" />
-        </div>
-
         <div>
           <h1 className="text-2xl font-black tracking-tight text-slate-900 leading-none uppercase">
             Early Warning System

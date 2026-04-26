@@ -58,20 +58,20 @@ export default function SummaryCards({ sensors }: SummaryCardsProps) {
       {stats.map((stat, index) => (
         <div
           key={index}
-          className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 group"
+          className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 group"
         >
           <div className="flex items-center justify-between mb-4">
             <div
-              className={`p-2.5 rounded-xl ${stat.bgColor} group-hover:scale-110 transition-transform`}
+              className={`p-2.5 rounded-lg ${stat.bgColor} group-hover:scale-110 transition-transform`}
             >
-              <stat.icon className={`h-6 w-6 ${stat.color}`} />
+              <stat.icon className={`h-5 w-5 ${stat.color}`} />
             </div>
-            <span className="text-4xl font-black text-slate-900 tabular-nums">
+            <span className="text-4xl font-bold tracking-tight text-slate-900 tabular-nums">
               {stat.value}
             </span>
           </div>
           <div>
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
               {stat.label}
             </p>
           </div>

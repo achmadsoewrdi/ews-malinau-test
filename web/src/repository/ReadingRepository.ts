@@ -1,6 +1,6 @@
-import { getInitializedDataSource } from "../data-source";
+import { getInitializedDataSource } from "@/lib/db";
 import { Reading } from "../entity/Reading";
-import { SENSOR_META, classifyStatus } from "../lib/thresholds";
+import { SENSOR_META, classifyStatus } from "../utils/thresholds";
 import { SensorStatus, ChartDataPoint } from "../types/sensor";
 
 // ==========================================

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getLast24Hours } from "@/repository/ReadingRepository";
-import { THRESHOLD } from "@/lib/thresholds";
+import { THRESHOLD } from "@/utils/thresholds";
 
 export async function GET(
   request: Request,
